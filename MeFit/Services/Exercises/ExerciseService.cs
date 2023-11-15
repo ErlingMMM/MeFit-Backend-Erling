@@ -69,13 +69,13 @@ namespace MeFit.Services.Exercises
         {
             return await _context.Exercises.AnyAsync(e => e.Id == id);
         }
-        private Task<bool> FranchiseExistsAsync(int franchiseId)
+        private Task<bool> PlanExistsAsync(Guid planId)
         {
-            return _context.Franchises.AnyAsync(f => f.Id == franchiseId);
+            return _context.Plans.AnyAsync(p => p.Id == planId);
         }
-        private Task<bool> MovieExistsAsync(int movieId)
+        private Task<bool> WorkoutExistsAsync(Guid workoutId)
         {
-            return _context.Movies.AnyAsync(m => m.Id == movieId);
+            return _context.Workouts.AnyAsync(w => w.Id == workoutId);
         }
     }
 }

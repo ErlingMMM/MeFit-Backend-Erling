@@ -14,7 +14,7 @@ namespace MeFit.Data.Models
         [StringLength(100)]
         public string Name { get; set; } = null!;
         [StringLength(100)]
-        public string Difficulty { get; set; } = null!;
+        public int Difficulty { get; set; }
         [StringLength(200)]
         public string Equipment { get; set; } = null!;
         [StringLength(200)]

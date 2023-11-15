@@ -21,6 +21,9 @@ namespace MeFit.Data
             Guid exercise2Id = Guid.NewGuid();
             Guid workout1Id = Guid.NewGuid();
             Guid workout2Id = Guid.NewGuid();
+            Guid plan1Id = Guid.NewGuid();
+            Guid plan2Id = Guid.NewGuid();
+
 
             modelBuilder.Entity<Exercise>().HasData(
                 new Exercise
@@ -66,6 +69,27 @@ namespace MeFit.Data
                 }
             );
 
+
+
+
+            modelBuilder.Entity<Plan>().HasData(
+       new Plan
+       {
+           Id = plan1Id,
+           Name = "Beginner Plan",
+           Description = "A beginner workout plan for getting started.",
+           Difficulty = 1,
+       },
+       new Plan
+       {
+           Id = plan2Id,
+           Name = "Intermediate Plan",
+           Description = "An intermediate workout plan for advancing your fitness.",
+           Difficulty = 2,
+       }
+   );
+
+
             modelBuilder.Entity<ExerciseWorkout>().HasData(
                 new ExerciseWorkout() { ExerciseId = exercise1Id, WorkoutId = workout1Id },
                 new ExerciseWorkout() { ExerciseId = exercise2Id, WorkoutId = workout2Id }
@@ -73,6 +97,8 @@ namespace MeFit.Data
         }
 
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Plan> Plans { get; set; }
+
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<ExerciseWorkout> ExerciseWorkouts { get; set; }
     }
