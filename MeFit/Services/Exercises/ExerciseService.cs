@@ -58,7 +58,7 @@ namespace MeFit.Services.Exercises
 
 
                 _context.Entry(obj).State = EntityState.Modified;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return obj;
             }

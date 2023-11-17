@@ -1,6 +1,14 @@
-﻿namespace MeFit.Services.Exercises
+﻿using MeFit.Data.Models;
+using MeFit.Services;
+
+namespace MeFit.Services.Exercises
 {
-    public class IExercisesService
+    public interface IExercisesService : ICrudService<Exercise, Guid>
     {
+        //Define the methods and operations that services must implement.
+        //Provide a level of abstraction and help in unit testing and mocking.
     }
 }
+
+
+
