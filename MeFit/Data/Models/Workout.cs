@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MeFit.Data.Models
 {
     //Define the structure of the data that will be stored in the database. 
-    [Table(nameof(Workout))]
+    [Table("Workouts")]
     public class Workout
     {
         [Key]
@@ -14,7 +14,6 @@ namespace MeFit.Data.Models
         [StringLength(100)]
         public string Name { get; set; } = null!;
 
-        [StringLength(100)]
         public int Difficulty { get; set; }
 
         [StringLength(200)]
