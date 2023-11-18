@@ -6,6 +6,7 @@ using MeFit.Data.Exceptions;
 using MeFit.Data.Models;
 using MeFit.Services.Workouts;
 using MeFit.Data.DTO.Workout;
+using MeFit.Data.DTO.Exercise;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -122,5 +123,52 @@ namespace WebMovieApi.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get all exercises in a workout by workout id
+        /// </summary>
+        /// <param name="workoutId"></param>
+        /// <returns></returns>
+        [HttpGet("{workoutId}/exercises")]
+        [ProducesResponseType(typeof(IEnumerable<ExerciseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<ExerciseDTO>>> GetExercisesInWorkout(Guid workoutId)
+        {
+            try
+            {
+                // Get the workout by ID
+                var workout = await _workoutService.GetByIdAsync(workoutId);
+
+                // Check if the workout exists
+                if (workout == null)
+                {
+                    return NotFound($"Workout with ID {workoutId} not found.");
+                }
+
+                // Check if ExerciseWorkouts collection is not null
+                if (workout.ExerciseWorkouts != null && workout.ExerciseWorkouts.Any())
+                {
+                    // Get the exercises within the workout using the many-to-many relationship
+                    var exercises = workout.ExerciseWorkouts.Select(ew => ew.Exercise).ToList();
+
+                    // Map the exercises to DTOs if needed
+                    var exerciseDTOs = _mapper.Map<IEnumerable<ExerciseDTO>>(exercises);
+
+                    return Ok(exerciseDTOs);
+                }
+
+                // If ExerciseWorkouts is null or empty, return an empty list
+                return Ok(new List<ExerciseDTO>());
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
     }
 }
+
+
+
