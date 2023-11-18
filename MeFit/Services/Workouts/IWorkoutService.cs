@@ -7,6 +7,9 @@ namespace MeFit.Services.Workouts
     {
         //Define the methods and operations that services must implement.
         //Provide a level of abstraction and help in unit testing and mocking.
+
+        Task AddExerciseToWorkoutAsync(ExerciseWorkout exerciseWorkout);
+
     }
 }
 

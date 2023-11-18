@@ -7,6 +7,9 @@ using MeFit.Data.Models;
 using MeFit.Services.Workouts;
 using MeFit.Data.DTO.Workout;
 using MeFit.Data.DTO.Exercise;
+using MeFit.Data.DTO.ExerciseWorkout;
+using MeFit.Services.Exercises;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +25,13 @@ namespace MeFit.Controllers
     public class WorkoutController : ControllerBase
     {
         private readonly IWorkoutService _workoutService;
+        private readonly IExercisesService _exerciseService;
         private readonly IMapper _mapper;
 
-        public WorkoutController(IWorkoutService workoutService, IMapper mapper)
+        public WorkoutController(IWorkoutService workoutService, IExercisesService exercisesService, IMapper mapper)
         {
             _workoutService = workoutService;
+            _exerciseService = exercisesService;
             _mapper = mapper;
         }
 
@@ -159,6 +164,49 @@ namespace MeFit.Controllers
 
                 // If ExerciseWorkouts is null or empty, return an empty list
                 return Ok(new List<ExerciseDTO>());
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Add exercise in a workout by workout id and exercise id
+        /// </summary>
+        /// <param name="workoutId"></param>
+        /// <returns></returns>
+        [HttpPost("AddExerciseToWorkout")]
+        public async Task<ActionResult> AddExerciseToWorkout(ExerciseWorkoutPostDTO exerciseWorkoutPostDTO)
+        {
+            try
+            {
+                // Check if the workout exists
+                var workout = await _workoutService.GetByIdAsync(exerciseWorkoutPostDTO.WorkoutId);
+                if (workout == null)
+                {
+                    return NotFound($"Workout with ID {exerciseWorkoutPostDTO.WorkoutId} not found.");
+                }
+
+                // Check if the exercise exists
+                var exercise = await _exerciseService.GetByIdAsync(exerciseWorkoutPostDTO.ExerciseId);
+                if (exercise == null)
+                {
+                    return NotFound($"Exercise with ID {exerciseWorkoutPostDTO.ExerciseId} not found.");
+                }
+
+                // Create the ExerciseWorkouts association
+                var exerciseWorkout = new ExerciseWorkout
+                {
+                    WorkoutId = exerciseWorkoutPostDTO.WorkoutId,
+                    ExerciseId = exerciseWorkoutPostDTO.ExerciseId
+                };
+
+                // Add the ExerciseWorkouts association to the database
+                await _workoutService.AddExerciseToWorkoutAsync(exerciseWorkout);
+
+                return Ok("Exercise added to workout successfully.");
             }
             catch (EntityNotFoundException ex)
             {

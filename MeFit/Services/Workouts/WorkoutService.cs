@@ -69,6 +69,8 @@ namespace MeFit.Services.Workouts
             }
         }
 
+
+
         //Helper Methods
 
         private Task<bool> PlanExistsAsync(Guid planId)
@@ -84,6 +86,44 @@ namespace MeFit.Services.Workouts
         {
             return _context.Workouts.AnyAsync(w => w.Id == id);
         }
+
+
+        public async Task AddExerciseToWorkoutAsync(ExerciseWorkout exerciseWorkout)
+        {
+            try
+            {
+                // Check if the workout exists
+                if (!await WorkoutExistsAsync(exerciseWorkout.WorkoutId))
+                {
+                    throw new EntityNotFoundException(nameof(Workout), exerciseWorkout.WorkoutId);
+                }
+
+                // Check if the exercise exists
+                if (!await ExerciseExistsAsync(exerciseWorkout.ExerciseId))
+                {
+                    throw new EntityNotFoundException(nameof(Exercise), exerciseWorkout.ExerciseId);
+                }
+
+                // Check if the ExerciseWorkout already exists for this workout and exercise combination
+                if (await _context.ExerciseWorkouts
+                    .AnyAsync(ew => ew.WorkoutId == exerciseWorkout.WorkoutId && ew.ExerciseId == exerciseWorkout.ExerciseId))
+                {
+                    throw new InvalidOperationException("ExerciseWorkout already exists for this workout and exercise combination.");
+                }
+
+                // If all checks pass, add the ExerciseWorkout to the database
+                _context.ExerciseWorkouts.Add(exerciseWorkout);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Handle any additional exceptions or log the error
+                throw new ApplicationException("Error adding ExerciseWorkout to the database.", ex);
+            }
+        }
+
+
     }
 }
+
 
