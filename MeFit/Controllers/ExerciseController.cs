@@ -9,7 +9,7 @@ using MeFit.Data.DTO.Exercise;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace WebMovieApi.Controllers
+namespace MeFit.Controllers
 {
     [ApiController]
     [Route("api/v1/Exercise")]
