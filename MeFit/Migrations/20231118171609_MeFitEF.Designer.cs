@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeFit.Migrations
 {
     [DbContext(typeof(MeFitDdContext))]
-    [Migration("20231117120217_initialDb")]
-    partial class initialDb
+    [Migration("20231118171609_MeFitEF")]
+    partial class MeFitEF
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,21 +67,21 @@ namespace MeFit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f21bf2b6-b150-4cee-be90-f59c81add994"),
+                            Id = new Guid("8fb9515d-844b-4e6b-8860-5b6551d656e0"),
                             Description = "Jumping jacks are a simple and effective cardiovascular exercise...",
                             Difficulty = 1,
                             Equipment = "Jump Rope",
-                            Image = "https://example.com/bicyclecrunches.jpg",
+                            Image = "https://unsplash.com/photos/a-woman-squatting-on-a-barbell-in-a-gym-iqr5wW_xwLY",
                             MuscleGroup = "Legs, Arms, Cardio",
                             Name = "Jumping Jacks"
                         },
                         new
                         {
-                            Id = new Guid("d3342565-af1d-4c64-b14c-432c5f2af5b9"),
+                            Id = new Guid("9fa664eb-b5d5-46e1-9c0c-fb42d0861d17"),
                             Description = "Bicycle crunches are a great abdominal exercise that targets multiple muscle groups...",
                             Difficulty = 2,
                             Equipment = "Exercise Mat",
-                            Image = "https://example.com/bicyclecrunches.jpg",
+                            Image = "https://unsplash.com/photos/woman-exercising-indoors-lrQPTQs7nQQ",
                             MuscleGroup = "Abdominals, Legs",
                             Name = "Bicycle Crunches"
                         });
@@ -104,13 +104,13 @@ namespace MeFit.Migrations
                     b.HasData(
                         new
                         {
-                            ExerciseId = new Guid("f21bf2b6-b150-4cee-be90-f59c81add994"),
-                            WorkoutId = new Guid("1f4c1c49-ec08-4137-b591-cf58bc86c160")
+                            ExerciseId = new Guid("8fb9515d-844b-4e6b-8860-5b6551d656e0"),
+                            WorkoutId = new Guid("66f51fe4-3e3c-4cdb-a136-a6f21dac25d5")
                         },
                         new
                         {
-                            ExerciseId = new Guid("d3342565-af1d-4c64-b14c-432c5f2af5b9"),
-                            WorkoutId = new Guid("143798a3-f637-4764-a42f-f5b41088a2c2")
+                            ExerciseId = new Guid("9fa664eb-b5d5-46e1-9c0c-fb42d0861d17"),
+                            WorkoutId = new Guid("5f83d4ae-ddd0-4d34-a2dd-cd27928bde9b")
                         });
                 });
 
@@ -145,7 +145,7 @@ namespace MeFit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d23dadd6-2283-4931-9620-b170f926a6c9"),
+                            Id = new Guid("9e6622a0-b931-45b7-a102-971c734b0030"),
                             Description = "A beginner workout plan for getting started.",
                             Difficulty = 1,
                             Image = "https://example.com/bicyclecrunches.jpg",
@@ -153,7 +153,7 @@ namespace MeFit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7d989a46-edef-451f-bc05-2cd76adebd66"),
+                            Id = new Guid("d15cd9c5-cf68-402e-8a02-38ab898395b6"),
                             Description = "An intermediate workout plan for advancing your fitness.",
                             Difficulty = 2,
                             Image = "https://example.com/bicyclecrunches.jpg",
@@ -208,7 +208,7 @@ namespace MeFit.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1f4c1c49-ec08-4137-b591-cf58bc86c160"),
+                            Id = new Guid("66f51fe4-3e3c-4cdb-a136-a6f21dac25d5"),
                             Description = "Full Body Circuit",
                             Difficulty = 2,
                             Equipment = "Jump Rope",
@@ -220,7 +220,7 @@ namespace MeFit.Migrations
                         },
                         new
                         {
-                            Id = new Guid("143798a3-f637-4764-a42f-f5b41088a2c2"),
+                            Id = new Guid("5f83d4ae-ddd0-4d34-a2dd-cd27928bde9b"),
                             Description = "High-Intensity Interval Training (HIIT)",
                             Difficulty = 3,
                             Equipment = "Exercise Mat",
@@ -249,13 +249,13 @@ namespace MeFit.Migrations
                     b.HasData(
                         new
                         {
-                            PlanId = new Guid("d23dadd6-2283-4931-9620-b170f926a6c9"),
-                            WorkoutId = new Guid("1f4c1c49-ec08-4137-b591-cf58bc86c160")
+                            PlanId = new Guid("9e6622a0-b931-45b7-a102-971c734b0030"),
+                            WorkoutId = new Guid("66f51fe4-3e3c-4cdb-a136-a6f21dac25d5")
                         },
                         new
                         {
-                            PlanId = new Guid("7d989a46-edef-451f-bc05-2cd76adebd66"),
-                            WorkoutId = new Guid("143798a3-f637-4764-a42f-f5b41088a2c2")
+                            PlanId = new Guid("d15cd9c5-cf68-402e-8a02-38ab898395b6"),
+                            WorkoutId = new Guid("5f83d4ae-ddd0-4d34-a2dd-cd27928bde9b")
                         });
                 });
 
