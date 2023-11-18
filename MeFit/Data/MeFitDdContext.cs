@@ -40,7 +40,7 @@ namespace MeFit.Data
                     Difficulty = 1,
                     MuscleGroup = "Legs, Arms, Cardio",
                     Equipment = "Jump Rope",
-                    Image = "https://example.com/bicyclecrunches.jpg" // Replace this URL with an actual image URL
+                    Image = "https://unsplash.com/photos/a-woman-squatting-on-a-barbell-in-a-gym-iqr5wW_xwLY" 
 
                 },
                 new Exercise
@@ -51,7 +51,7 @@ namespace MeFit.Data
                     Difficulty = 2,
                     MuscleGroup = "Abdominals, Legs",
                     Equipment = "Exercise Mat",
-                    Image = "https://example.com/bicyclecrunches.jpg" // Replace this URL with an actual image URL
+                    Image = "https://unsplash.com/photos/woman-exercising-indoors-lrQPTQs7nQQ"
 
                 }
             );
