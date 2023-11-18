@@ -8,7 +8,6 @@ namespace MeFit.Data.DTO.Exercise
         [StringLength(100)]
 
         public string Name { get; set; } = null!;
-        [StringLength(200)]
 
         public int Difficulty { get; set; }
         [StringLength(200)]
@@ -17,6 +16,8 @@ namespace MeFit.Data.DTO.Exercise
         [StringLength(200)]
 
         public string MuscleGroup { get; set; } = null!;
+        [StringLength(500)]
+
         public string Description { get; set; } = null!;
         [StringLength(500)]
 
