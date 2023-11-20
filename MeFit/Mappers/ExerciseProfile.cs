@@ -17,8 +17,19 @@ namespace MeFit.Mappers
             CreateMap<ExercisePostDTO, Exercise>().ReverseMap();
 
             CreateMap<Exercise, ExerciseDTO>()
-                .ForMember(wdto => wdto.ExerciseWorkouts, options => options.MapFrom(ew => ew.ExerciseWorkouts.Select(w => w.WorkoutId).ToArray()));
+            .ForMember(
+                dto => dto.Workouts,
+                opt => opt.MapFrom(src => src.Workouts.Select(w => new WorkoutDTO { Id = w.Id })))
+            .ReverseMap();
+            CreateMap<ExercisePutDTO, Exercise>().ReverseMap();
+
+            CreateMap<int, WorkoutDTO>().ConstructUsing(id => new WorkoutDTO { Id = id });
+            CreateMap<WorkoutDTO, Workout>().ReverseMap();
         }
     }
 }
+
+
+
+
 

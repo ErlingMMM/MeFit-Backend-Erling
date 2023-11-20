@@ -25,7 +25,7 @@ namespace MeFit.Services.Plans
         {
             return await _context.Plans.ToListAsync();
         }
-        public async Task<Plan> GetByIdAsync(Guid id)
+        public async Task<Plan> GetByIdAsync(int id)
         {
             var plan = await _context.Plans.Where(p => p.Id == id).FirstAsync();
 
@@ -40,7 +40,7 @@ namespace MeFit.Services.Plans
             await _context.SaveChangesAsync();
             return obj;
         }
-        public async Task DeleteByIdAsync(Guid id)
+        public async Task DeleteByIdAsync(int id)
         {
             if (!await PlanExistsAsync(id))
                 throw new EntityNotFoundException(nameof(Plan), id);
@@ -69,16 +69,16 @@ namespace MeFit.Services.Plans
 
         //Helper Methods
        
-        private Task<bool> PlanExistsAsync(Guid id)
+        private Task<bool> PlanExistsAsync(int id)
         {
             return _context.Plans.AnyAsync(p => p.Id == id);
         }
 
-        private async Task<bool> ExerciseExistsAsync(Guid exerciseId)
+        private async Task<bool> ExerciseExistsAsync(int exerciseId)
         {
             return await _context.Exercises.AnyAsync(e => e.Id == exerciseId);
         }
-        private Task<bool> WorkoutExistsAsync(Guid workoutId)
+        private Task<bool> WorkoutExistsAsync(int workoutId)
         {
             return _context.Workouts.AnyAsync(w => w.Id == workoutId);
         }

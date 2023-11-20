@@ -12,8 +12,12 @@ namespace MeFit.Mappers
             CreateMap<WorkoutPostDTO, Workout>().ReverseMap();
 
             CreateMap<Workout, WorkoutDTO>()
-                .ForMember(wdto => wdto.ExerciseWorkouts, options => options.MapFrom(ew => ew.ExerciseWorkouts.Select(w => w.WorkoutId).ToArray()))
+                    .ForMember(wdto => wdto.Exercises, options => options.MapFrom(w => w.Exercises.Select(c => c.Id).ToArray()))
                 .ForMember(wdto => wdto.WorkoutPlans, options => options.MapFrom(wp => wp.WorkoutPlans.Select(w => w.WorkoutId).ToArray())).ReverseMap();
         }
     }
 }
+
+
+
+

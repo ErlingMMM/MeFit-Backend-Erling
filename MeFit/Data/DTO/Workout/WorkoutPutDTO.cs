@@ -4,7 +4,7 @@ namespace MeFit.Data.DTO.Workout
 {
     public class WorkoutPutDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [StringLength(100)]
         public string Name { get; set; } = null!;
         [StringLength(500)]

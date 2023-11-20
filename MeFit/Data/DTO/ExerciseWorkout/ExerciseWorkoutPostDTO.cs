@@ -2,7 +2,7 @@
 {
     public class ExerciseWorkoutPostDTO
     {
-        public Guid WorkoutId { get; set; }
-        public Guid ExerciseId { get; set; }
+        public int WorkoutId { get; set; }
+        public int ExerciseId { get; set; }
     }
 }

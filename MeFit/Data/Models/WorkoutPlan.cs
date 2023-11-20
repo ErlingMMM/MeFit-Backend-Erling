@@ -6,12 +6,12 @@ namespace MeFit.Data.Models
     public class WorkoutPlan
     {
         [ForeignKey("WorkoutId")]
-        public Guid WorkoutId { get; set; }
+        public int WorkoutId { get; set; }
 
         public Workout? Workout { get; set; }
 
         [ForeignKey("PlanId")]
-        public Guid PlanId { get; set; }
+        public int PlanId { get; set; }
 
         public Plan? Plan { get; set; }
     }

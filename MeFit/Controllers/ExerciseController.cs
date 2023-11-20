@@ -49,7 +49,7 @@ namespace MeFit.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ExerciseDTO>> GetExercise(Guid id)
+        public async Task<ActionResult<ExerciseDTO>> GetExercise(int id)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace MeFit.Controllers
         /// <param name="exercise"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExercise(Guid id, ExercisePutDTO exercise)
+        public async Task<IActionResult> PutExercise(int id, ExercisePutDTO exercise)
         {
             if (id != exercise.Id)
             {
@@ -110,7 +110,7 @@ namespace MeFit.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExercise(Guid id)
+        public async Task<IActionResult> DeleteExercise(int id)
         {
             try
             {

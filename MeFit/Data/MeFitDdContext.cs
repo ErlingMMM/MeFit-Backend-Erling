@@ -23,12 +23,12 @@ namespace MeFit.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Guid exercise1Id = Guid.NewGuid();
-            Guid exercise2Id = Guid.NewGuid();
-            Guid workout1Id = Guid.NewGuid();
-            Guid workout2Id = Guid.NewGuid();
-            Guid plan1Id = Guid.NewGuid();
-            Guid plan2Id = Guid.NewGuid();
+            int exercise1Id = 1;
+            int exercise2Id = 2;
+            int workout1Id = 1;
+            int workout2Id = 2;
+            int plan1Id = 1;
+            int plan2Id = 2;
 
 
             modelBuilder.Entity<Exercise>().HasData(
@@ -109,13 +109,25 @@ namespace MeFit.Data
 
        }
    );
-            modelBuilder.Entity<ExerciseWorkout>()
-        .HasKey(e => new { e.ExerciseId, e.WorkoutId });
+
+           
+            modelBuilder.Entity<ExerciseWorkout>().HasKey(ew => new { ew.ExerciseId, ew.WorkoutId });
+
+
+            modelBuilder.Entity<Exercise>()
+                .HasMany(left => left.Workouts)
+                .WithMany(right => right.Exercises)
+                .UsingEntity<ExerciseWorkout>(
+                    right => right.HasOne(e => e.Workout).WithMany(),
+                    left => left.HasOne(e => e.Exercise).WithMany().HasForeignKey(e => e.ExerciseId),
+                    join => join.ToTable("ExerciseWorkout")
+                );
 
             modelBuilder.Entity<ExerciseWorkout>().HasData(
-                new ExerciseWorkout() { ExerciseId = exercise1Id, WorkoutId = workout1Id },
-                new ExerciseWorkout() { ExerciseId = exercise2Id, WorkoutId = workout2Id }
-            );
+                new ExerciseWorkout() { ExerciseId = 1, WorkoutId = 1 },
+                new ExerciseWorkout() { ExerciseId = 2, WorkoutId = 2 },
+                new ExerciseWorkout() { ExerciseId = 1, WorkoutId = 2 },
+                new ExerciseWorkout() { ExerciseId = 2, WorkoutId = 1 });
 
 
             modelBuilder.Entity<WorkoutPlan>()

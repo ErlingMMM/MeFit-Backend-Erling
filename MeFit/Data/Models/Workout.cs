@@ -9,7 +9,7 @@ namespace MeFit.Data.Models
     public class Workout
     {
         [Key]
-        public Guid Id { get; set; } 
+        public int Id { get; set; } 
 
         [StringLength(100)]
         public string Name { get; set; } = null!;
@@ -33,7 +33,7 @@ namespace MeFit.Data.Models
         public int Reps { get; set; }
 
 
-        public ICollection<ExerciseWorkout>? ExerciseWorkouts { get; set; }
+        public ICollection<Exercise>? Exercises { get; set; }
         public ICollection<WorkoutPlan>? WorkoutPlans { get; set; }
 
     }

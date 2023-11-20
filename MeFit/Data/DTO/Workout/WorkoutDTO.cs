@@ -11,7 +11,7 @@ namespace MeFit.Data.Dtos.Workout
         //Used for transferring data between the client and the server.
         //Allow you to control what data is exposed to clients and provide a clear structure for data exchange.
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 
@@ -29,8 +29,8 @@ namespace MeFit.Data.Dtos.Workout
 
         public int Reps { get; set; }
 
-        public Guid[]? ExerciseWorkouts { get; set; }
-        public Guid[]? WorkoutPlans { get; set; }
+        public List<ExerciseDTO>? Exercises { get; set; }
+        public int[]? WorkoutPlans { get; set; }
 
     }
 }

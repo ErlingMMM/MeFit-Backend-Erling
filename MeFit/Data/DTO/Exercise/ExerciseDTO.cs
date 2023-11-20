@@ -5,7 +5,7 @@ namespace MeFit.Data.DTO.Exercise
 {
     public class ExerciseDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
         public int Difficulty { get; set; }
@@ -14,7 +14,7 @@ namespace MeFit.Data.DTO.Exercise
         public string Description { get; set; } = null!;
 
         public string Image { get; set; } = null!;
-        public Guid[]? ExerciseWorkouts { get; set; }
+        public List<WorkoutDTO>? Workouts { get; set; }
 
     }
 }

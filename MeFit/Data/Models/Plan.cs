@@ -7,7 +7,7 @@ namespace MeFit.Data.Models
     public class Plan
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(100)]
         public string Name { get; set; } = null!;
