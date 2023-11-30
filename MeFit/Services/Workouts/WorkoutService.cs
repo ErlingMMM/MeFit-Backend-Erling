@@ -72,7 +72,6 @@ namespace MeFit.Services.Workouts
 
 
 
-        //IWorkoutService - double check 
         public async Task<ICollection<Exercise>> GetAllExercisesInWorkoutAsync(int id)
         {
             if (!await WorkoutExistsAsync(id))
@@ -82,6 +81,39 @@ namespace MeFit.Services.Workouts
                 .Where(c => c.Workouts.Any(m => m.Id == id))
                 .ToListAsync();
         }
+
+
+        public async Task<ICollection<Exercise>> PutExerciseInWorkoutAsync(int workoutId, int[] exerciseIds)
+        {
+            // Check if the workout exists
+            if (!await WorkoutExistsAsync(workoutId))
+                throw new EntityNotFoundException(nameof(Workout), workoutId);
+
+
+            // Retrieve the workout from the database
+            var workout = await _context.Workouts.FindAsync(workoutId);
+
+            if (workout == null)
+            {
+                // Handle the case where the workout is not found
+                throw new EntityNotFoundException(nameof(Workout), workoutId);
+            }
+
+            // Retrieve the exercises from the database based on exerciseIds
+            var exercises = await _context.Exercises
+                .Where(e => exerciseIds.Contains(e.Id))
+                .ToListAsync();
+
+            // Associate the exercises with the workout
+            workout.Exercises.AddRange(exercises);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            // Return the added exercises
+            return exercises;
+        }
+
 
 
 

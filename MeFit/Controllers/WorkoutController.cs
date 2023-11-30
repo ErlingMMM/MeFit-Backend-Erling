@@ -132,7 +132,7 @@ namespace MeFit.Controllers
         /// <summary>
         /// Get all exercises in a workout by workout id
         /// </summary>
-        /// <param name="workoutId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/exercises")]
         public async Task<ActionResult<IEnumerable<ExerciseDTO>>> GetAllExercisesInWorkout(int id)
@@ -142,6 +142,30 @@ namespace MeFit.Controllers
                 return Ok(_mapper
                     .Map<IEnumerable<ExerciseDTO>>(
                         await _workoutService.GetAllExercisesInWorkoutAsync(id)));
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+        }
+
+
+        /// <summary>
+        /// Add a exercise in a workout by workout id and exercise id
+        /// </summary>
+        /// <param name="workoutId"></param>
+        /// <param name="exerciseIds"></param>
+        /// <returns></returns>
+        [HttpPut("{id}/exercises")]
+        public async Task<ActionResult<IEnumerable<ExercisePutDTO>>> PutExerciseInWorkout(int workoutId, int[] exerciseIds)
+        {
+            try
+            {
+               
+            await _workoutService.PutExerciseInWorkoutAsync(workoutId, exerciseIds);
+            return NoContent();
+
             }
             catch (EntityNotFoundException ex)
             {

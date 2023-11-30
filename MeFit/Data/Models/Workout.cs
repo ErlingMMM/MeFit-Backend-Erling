@@ -33,8 +33,9 @@ namespace MeFit.Data.Models
         public int Reps { get; set; }
 
 
-        public ICollection<Exercise>? Exercises { get; set; }
-        public ICollection<WorkoutPlan>? WorkoutPlans { get; set; }
+        public List<Exercise> Exercises { get; set; } = new List<Exercise>();
+
+        public List<WorkoutPlan> WorkoutPlans { get; set; } = new List<WorkoutPlan>();
 
     }
 }

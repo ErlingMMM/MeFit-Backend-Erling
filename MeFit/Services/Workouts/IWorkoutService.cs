@@ -11,6 +11,7 @@ namespace MeFit.Services.Workouts
 
 
         Task<ICollection<Exercise>> GetAllExercisesInWorkoutAsync(int id);
+        Task<ICollection<Exercise>> PutExerciseInWorkoutAsync(int workoutId, int [] exerciseIds);
 
     }
 }
